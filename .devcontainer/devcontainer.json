@@ -1,0 +1,67 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/java-postgres
+{
+	"name": "Java & PostgreSQL",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {}
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// This can be used to network with other containers or with the host.
+	// "forwardPorts": [5432],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "java -version",
+
+	// Configure tool-specific properties.
+	"customizations": {
+
+		// Configure properties specififc to vscode
+		"vscode": {
+
+			// Set *default* container specific settings.json values on container create.
+			"settings": { 
+				"#terminal.integrated.defaultProfile.linux#": "/bin/bash",
+				"java.jdt.ls.java.home": "/docker-java-home",
+				// GRADLE_HOME - install path to gradle 
+				// - this is the path to the local gradle installation, otherwise it will try to reach out to the internet 
+				// - downloaded from artifactory and override the current install as the base container only seemed to provide the bin
+				"java.import.gradle.home": "/opt/gradle",
+				// jdk used by gradle, set to JAVA_HOME
+				"java.import.gradle.java.home": "/docker-java-home",
+
+				"java.format.comments.enabled": false,
+				// VSCode messes up license headers
+				"editor.formatOnSave": false,
+				// Align with eclipse and Google style
+				"java.completion.importOrder": [
+					"com",
+					"java",
+					"javax",
+					"org"
+				],
+				"workbench.iconTheme": "material-icon-theme",
+				"workbench.colorTheme": "Dracula Soft"
+			},
+
+			"extensions": [
+				"vscjava.vscode-java-pack",
+				"vmware.vscode-boot-dev-pack",
+				"vscjava.vscode-gradle",
+				"DavidAnson.vscode-markdownlint",
+				"GabrielBB.vscode-lombok",
+				"dracula-theme.theme-dracula",
+				"PKief.material-icon-theme",
+				"streetsidesoftware.code-spell-checker",""
+
+			]
+		}
+		
+	}
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}
